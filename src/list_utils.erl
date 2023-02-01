@@ -1,5 +1,5 @@
 -module(list_utils).
--export([min/1,max/1,min_max/1]).
+-export([min/1,max/1,min_max/1,duplicate/2,reverse/1]).
 
 min_max([]) -> io:format("Cannot find min and max value of empty list.~n");
 min_max([H|T]) ->
@@ -28,3 +28,19 @@ lmax(Max, [H|T]) ->
     false -> lmax(H, T)
     end;
 lmax(Max, []) -> Max.
+
+duplicate(N, Term) ->
+    duplicate(N, Term, []).
+
+duplicate(0, _, List) ->
+    List;
+duplicate(N, Term, List) when N > 0 ->
+    duplicate(N - 1, Term, [Term|List]).
+
+
+reverse([]) -> [];
+reverse(L) -> reverse(L, []).
+
+reverse([], R) -> R;
+reverse([H|T], R) -> reverse(T, [H|R]).
+
